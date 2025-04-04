@@ -1,0 +1,49 @@
+// Matrix_Bot - بوت ماينكرافت ذكي وممتع!
+const mineflayer = require('mineflayer')
+
+// إنشاء البوت
+const bot = mineflayer.createBot({
+  host: 'LionCraftgg.aternos.me',
+  port: 50838,
+  username: 'Matrix_Bot',
+  auth: 'offline',
+  version: '1.21.4'
+})
+
+// عند الدخول
+bot.once('spawn', () => {
+  bot.chat('Matrix_Bot جاهز! اكتب !help لعرض الأوامر')
+})
+
+// أوامر الدردشة
+bot.on('chat', (username, message) => {
+  if (username === bot.username) return
+
+  if (message === '!help') {
+    bot.chat('الأوامر المتاحة: !hello, !say <كلام>, !jump, !move')
+  }
+
+  if (message === '!hello') {
+    bot.chat(`هلا ${username}، أنا ماتريكس بوت 🤖`)
+  }
+
+  if (message.startsWith('!say ')) {
+    const text = message.slice(5).trim()
+    bot.chat(text.length > 0 ? text : 'اكتب شي بعد !say')
+  }
+
+  if (message === '!jump') {
+    bot.setControlState('jump', true)
+    setTimeout(() => bot.setControlState('jump', false), 1000)
+    bot.chat('نطيت! 🦘')
+  }
+
+  if (message === '!move') {
+    bot.setControlState('forward', true)
+    bot.chat('يلا نمشي شوي... 🕺')
+    setTimeout(() => {
+      bot.setControlState('forward', false)
+      bot.chat('وقفت!')
+    }, 3000)
+  }
+})

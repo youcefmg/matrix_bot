@@ -1,0 +1,13 @@
+{
+  "name": "matrix_bot",
+  "version": "1.0.0",
+  "description": "Matrix Minecraft Bot",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "mineflayer": "^4.11.1"
+  }
+}
+
